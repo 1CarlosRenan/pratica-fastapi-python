@@ -9,16 +9,20 @@ async def home():
     return {"mensagem": "Olá, FastAPI"}
 
 
+# parametro de rota
 @app.get("/saudacao/{nome}")  # decorator e parametro de rota
 async def saudar(nome: str):
     texto = f'Olá, {nome}! Tudo bem?'
     return {"mensagem": texto}
 
 
+# parametro de query
 @app.get("/dobro")  # decorator
 async def dobro(valor: int):
     resultado = 2 * valor
     return {"resultado": f'O dobro de {valor} é {resultado}'}
+
+# tornando o valor altura opcional
 
 
 @app.get('/area-retangulo')  # decorator
