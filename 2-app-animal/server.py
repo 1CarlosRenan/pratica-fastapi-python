@@ -14,12 +14,15 @@ class Animal(BaseModel):
     cor: str
 
 
+# Simulando um banco de dados
 banco: List[Animal] = []
 
 
 @app.get('/animais')
 def listar_animais():
     return banco
+
+# UUID dá o tipo ao animal_id
 
 
 @app.get('/animais/{animal_id}')
@@ -47,6 +50,6 @@ def remover_animal(animal_id: str):
 
 @app.post('/animais')
 def criar_animal(animal: Animal):
-    animal.id = uuid4()
+    animal.id = uuid4()  # sem o UUID, usar str()
     banco.append(animal)
     return None
