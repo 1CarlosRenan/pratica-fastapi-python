@@ -16,5 +16,6 @@ def criar_produto(produto: schemas.Produto, db: Session = Depends(get_db)):
 
 
 @app.get('/produtos')
-def listar_produtos():
-    return {'Msg': 'Listagem de Produtos'}
+def listar_produtos(db: Session = Depends(get_db)):
+    produtos = RepositorioProduto(db).listar()
+    return produtos
