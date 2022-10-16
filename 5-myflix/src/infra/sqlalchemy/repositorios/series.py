@@ -22,6 +22,7 @@ class RepositorioSerie():
 
     def listar(self):
         series = self.db.query(models.Serie).all()
+        return series
 
     def obter(self):
         pass
