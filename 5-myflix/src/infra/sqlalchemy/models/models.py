@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String
 from src.infra.sqlalchemy.config.database import Base
 
 
-class Series(Base):
+class Serie(Base):
     __tablename__: 'serie'
 
     id = Column(Integer, primary_key=True, index=True)
