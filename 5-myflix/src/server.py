@@ -19,3 +19,9 @@ def criar_serie(serie: schemas.Serie, db: Session = Depends(get_db)):
 @app.get('/series')
 def listar_serie(db: Session = Depends(get_db)):
     return RepositorioSerie(db).listar()
+
+
+@app.get('/series/{serie_id}')
+def obter_serie(serie_id: int, db: Session = Depends(get_db)):
+    serie = RepositorioSerie(db).obter(serie_id)
+    return serie

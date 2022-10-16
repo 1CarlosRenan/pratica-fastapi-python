@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from src.infra.sqlalchemy.models import models
 from src.schemas import schemas
@@ -24,8 +25,11 @@ class RepositorioSerie():
         series = self.db.query(models.Serie).all()
         return series
 
-    def obter(self):
-        pass
+    def obter(self, serie_id: int):
+        stmt = select(models.Serie).filter_by(id=serie_id)
+        serie = self.db.execute(stmt).one()
+
+        return serie
 
     def remover(self):
         pass
