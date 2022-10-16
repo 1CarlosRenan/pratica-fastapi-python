@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from sqlalchemy.orm import Session
 from src.infra.sqlalchemy.models import models
 from src.schemas import schemas
@@ -31,5 +31,8 @@ class RepositorioSerie():
 
         return serie
 
-    def remover(self):
-        pass
+    def remover(self, serie_id: int):
+        stmt = delete(models.Serie).where(models.Serie.id == serie_id)
+
+        self.db.execute(stmt)
+        self.db.commit()

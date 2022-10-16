@@ -25,3 +25,9 @@ def listar_serie(db: Session = Depends(get_db)):
 def obter_serie(serie_id: int, db: Session = Depends(get_db)):
     serie = RepositorioSerie(db).obter(serie_id)
     return serie
+
+
+@app.delete('/series/{serie_id}')
+def obter_serie(serie_id: int, db: Session = Depends(get_db)):
+    RepositorioSerie(db).remover(serie_id)
+    return {"msg": "Removido com sucesso"}
