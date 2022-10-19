@@ -3,7 +3,7 @@ from typing import Optional, List
 
 
 class Usuario(BaseModel):
-    id: Optional[str] = None
+    id: Optional[int] = None
     nome: str
     telefone: str
     senha: str
