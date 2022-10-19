@@ -31,3 +31,9 @@ def listar_produtos(db: Session = Depends(get_db)):
 def criar_usuario(usuario: Usuario, session: Session = Depends(get_db)):
     usuario_criado = RepositorioUsuario(session).criar(usuario)
     return usuario_criado
+
+
+@app.get('/usuarios')
+def listar_usuario(session: Session = Depends(get_db)):
+    usuarios = RepositorioUsuario(session).listar()
+    return usuarios

@@ -20,7 +20,7 @@ class RepositorioUsuario():
 
     def listar(self):
         stmt = select(models.Usuario)
-        usuarios = self.session.execute(stmt).all()
+        usuarios = self.session.execute(stmt).scalars().all()
         return usuarios
 
     def obter(self):
