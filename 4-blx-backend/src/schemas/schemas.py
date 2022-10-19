@@ -18,6 +18,8 @@ class Produto(BaseModel):
     detalhes: str
     preco: float
     disponivel: bool = False
+    usuario_id: int
+    usuario: Optional[Usuario]
 
     class Config:
         orm_mode = True
