@@ -8,6 +8,9 @@ class Usuario(BaseModel):
     telefone: str
     senha: str
 
+    class Config:
+        orm_mode = True
+
 
 class Produto(BaseModel):
     id: Optional[str] = None
