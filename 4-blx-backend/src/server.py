@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, status
+from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 from sqlalchemy.orm import Session
 from src.infra.sqlalchemy.config.database import get_db, criar_db
@@ -9,6 +10,16 @@ from src.infra.sqlalchemy.repositorios.repositorio_usuario import RepositorioUsu
 # criar_db()
 
 app = FastAPI()
+
+# CORS
+origins = ['http://localhost:3000', 'https://myapp.vercel.com']
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # PRODUTOS
