@@ -31,7 +31,13 @@ def atualizar_produto(produto: Produto, session: Session = Depends(get_db)):
     return produto
 
 
+@app.delete('/produtos/{id}')
+def remover_produto(id: int, session: Session = Depends(get_db)):
+    RepositorioProduto(session).remover(id)
+    return
+
 # USUARIOS
+
 
 @app.post('/usuarios', status_code=status.HTTP_201_CREATED, response_model=Usuario)
 def criar_usuario(usuario: Usuario, session: Session = Depends(get_db)):
