@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from src.infra.sqlalchemy.config.database import get_db, criar_db
 from src.schemas.schemas import Produto, ProdutoSimples, Usuario
-from src.infra.sqlalchemy.repositorios.produto import RepositorioProduto
+from src.infra.sqlalchemy.repositorios.repositorio_produto import RepositorioProduto
 from src.infra.sqlalchemy.repositorios.repositorio_usuario import RepositorioUsuario
 
 # criar_db()
