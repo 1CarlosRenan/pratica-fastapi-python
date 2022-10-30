@@ -25,9 +25,10 @@ def listar_produtos(db: Session = Depends(get_db)):
     return produtos
 
 
-@app.put('/produtos', response_model=Produto)
-def atualizar_produto(produto: Produto, session: Session = Depends(get_db)):
-    RepositorioProduto(session).editar(produto)
+@app.put('/produtos/{id}', response_model=ProdutoSimples)
+def atualizar_produto(id: int, produto: Produto, session: Session = Depends(get_db)):
+    RepositorioProduto(session).editar(id, produto)
+    produto.id = id
     return produto
 
 

@@ -13,12 +13,12 @@ class Usuario(BaseModel):
 
 
 class Produto(BaseModel):
-    id: Optional[str] = None
+    id: Optional[int] = None
     nome: str
     detalhes: str
     preco: float
     disponivel: bool = False
-    usuario_id: int
+    usuario_id: Optional[int]
     usuario: Optional[Usuario]
 
     class Config:
