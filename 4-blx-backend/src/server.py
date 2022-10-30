@@ -37,16 +37,15 @@ def remover_produto(id: int, session: Session = Depends(get_db)):
     RepositorioProduto(session).remover(id)
     return
 
+
 # USUARIOS
-
-
-@app.post('/usuarios', status_code=status.HTTP_201_CREATED, response_model=Usuario)
-def criar_usuario(usuario: Usuario, session: Session = Depends(get_db)):
+@app.post('/signup', status_code=status.HTTP_201_CREATED, response_model=Usuario)
+def signup(usuario: Usuario, session: Session = Depends(get_db)):
     usuario_criado = RepositorioUsuario(session).criar(usuario)
     return usuario_criado
 
 
-@app.get('/usuarios')
+@app.get('/usuarios', response_model=List[Usuario])
 def listar_usuario(session: Session = Depends(get_db)):
     usuarios = RepositorioUsuario(session).listar()
     return usuarios
