@@ -2,7 +2,7 @@ from fastapi import APIRouter, status, Depends, HTTPException
 from typing import List
 from sqlalchemy.orm import Session
 from src.infra.sqlalchemy.config.database import get_db
-from src.schemas.schemas import Pedido, ProdutoSimples
+from src.schemas.schemas import Pedido
 from src.infra.sqlalchemy.repositorios.repositorio_pedido import RepositorioPedido
 
 router = APIRouter()
@@ -14,13 +14,13 @@ def fazer_pedido(pedido: Pedido, session: Session = Depends(get_db)):
     return pedido_criado
 
 
-@router.get('/pedidos/{id}', response_model=ProdutoSimples)
+@router.get('/pedidos/{id}', response_model=Pedido)
 def exibir_pedido(id: int, session: Session = Depends(get_db)):
     pedido = RepositorioPedido(session).buscar_por_id(id)
     return pedido
 
 
-@router.get('/pedidos/{usuario_id}', response_model=List[Pedido])
+@router.get('/pedidos', response_model=List[Pedido])
 def listar_pedidos(usuario_id: int, session: Session = Depends(get_db)):
     pedidos = RepositorioPedido(
         session).listar_meus_pedidos_por_usuario_id(usuario_id)
