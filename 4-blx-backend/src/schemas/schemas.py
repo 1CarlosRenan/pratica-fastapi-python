@@ -6,6 +6,7 @@ class ProdutoSimples(BaseModel):
     id: Optional[int] = None
     nome: str
     preco: float
+    disponivel: bool
 
     class Config:
         orm_mode = True
