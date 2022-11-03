@@ -28,17 +28,17 @@ class RepositorioPedido():
 
     def buscar_por_id(self, id: int) -> models.Pedido:
         query = select(models.Pedido).where(models.Pedido.id == id)
-        resultado = self.session.execute(query).one()
-        return resultado[0]
+        pedido = self.session.execute(query).scalars().one()
+        return pedido
 
     def listar_meus_pedidos_por_usuario_id(self, usuario_id: int) -> List[models.Pedido]:
         query = select(models.Pedido).where(
             models.Pedido.usuario_id == usuario_id)
-        resultado = self.session.execute(query).all()
-        return resultado
+        pedidos = self.session.execute(query).scalars().all()
+        return pedidos
 
     def listar_minhas_vendas_por_usuario_id(self, usuario_id: int) -> List[models.Pedido]:
         query = select(models.Pedido).join_from(models.Pedido, models.Produto).where(
             models.Produto.usuario_id == usuario_id)
-        resultado = self.session.execute(query).all()
-        return resultado
+        pedidos = self.session.execute(query).scalars().all()
+        return pedidos
