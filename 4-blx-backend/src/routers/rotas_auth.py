@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from src.infra.sqlalchemy.config.database import get_db
 from src.infra.sqlalchemy.repositorios.repositorio_usuario import RepositorioUsuario
 from src.schemas.schemas import Usuario, UsuarioSimples, LoginData
-from src.infra.providers import hash_provider
+from src.infra.providers import hash_provider, token_provider
 
 
 router = APIRouter()
@@ -42,4 +42,5 @@ def login(login_data: LoginData, session: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='Telefone ou senha estão incorretas!')
 
-    return usuario
+    token = token_provider.criar_access_token({'sub': usuario.telefone})
+    return {'usuario': usuario, 'access_token': token}
