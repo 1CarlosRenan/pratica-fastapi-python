@@ -4,6 +4,7 @@ from src.infra.sqlalchemy.config.database import get_db
 from src.infra.sqlalchemy.repositorios.repositorio_usuario import RepositorioUsuario
 from src.schemas.schemas import Usuario, UsuarioSimples, LoginData
 from src.infra.providers import hash_provider, token_provider
+from src.routers.auth_utils import obter_usuario_logado
 
 
 router = APIRouter()
@@ -42,5 +43,12 @@ def login(login_data: LoginData, session: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='Telefone ou senha estão incorretas!')
 
+    # Gerar token JWT
     token = token_provider.criar_access_token({'sub': usuario.telefone})
     return {'usuario': usuario, 'access_token': token}
+
+
+@router.get('/me', response_model=UsuarioSimples)
+def me(usuario: Usuario = Depends(obter_usuario_logado)):
+    # decodificar o token, pegar o telefone, buscar usuario no db e retornar
+    pass
